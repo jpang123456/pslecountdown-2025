@@ -10,32 +10,39 @@
             text-align: center;
             background-color: #f4f4f4;
             padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         h1 {
             color: #333;
         }
         .countdown-container {
-            margin-top: 50px;
-            padding: 25px;
+            margin-top: 30px;
+            padding: 20px;
             border: 2px solid #333;
             border-radius: 10px;
             background-color: #fff;
-            display: inline-block;
-            width: 350px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         .countdown, .weekendCountdown {
-            font-size: 24px;
+            font-size: 20px;
             font-weight: bold;
             margin-top: 10px;
         }
         .bold-days {
-            font-size: 30px;
+            font-size: 28px;
             font-weight: bold;
             color: #d9534f;
             display: block;
         }
         .small-text {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: normal;
         }
         .bold-number {
@@ -45,7 +52,7 @@
             color: #5bc0de;
         }
         .exam-date {
-            font-size: 16px;
+            font-size: 14px;
             color: #777;
             margin-top: 5px;
         }
@@ -53,42 +60,42 @@
 </head>
 <body>
     <h1>Countdown to WA, Prelim & PSLE Exams</h1>
-    
+
     <div class="countdown-container">
         <h2>WA Exam</h2>
         <div class="exam-date">Date: May 13, 2025</div>
         <div id="waCountdown" class="countdown"></div>
         <div id="waWeekendCountdown" class="weekendCountdown"></div>
     </div>
-    
+
     <div class="countdown-container">
         <h2>Prelim Exam</h2>
         <div class="exam-date">Date: August 15, 2025</div>
         <div id="prelimCountdown" class="countdown"></div>
         <div id="prelimWeekendCountdown" class="weekendCountdown"></div>
     </div>
-    
+
     <div class="countdown-container">
         <h2>PSLE Exam</h2>
         <div class="exam-date">Date: September 25, 2025</div>
         <div id="psleCountdown" class="countdown"></div>
         <div id="psleWeekendCountdown" class="weekendCountdown"></div>
     </div>
-    
+
     <script>
         function updateCountdown(targetDate, countdownId, weekendId) {
             const now = new Date().getTime();
             const timeRemaining = targetDate - now;
-            
+
             const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
             const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
-            
+
             document.getElementById(countdownId).innerHTML = 
                 `<span class="bold-days">${days} days</span>
                 <span class="small-text"><span class="bold-number">${hours}</span> hours, <span class="bold-number">${minutes}</span> minutes, <span class="bold-number">${seconds}</span> seconds</span>`;
-            
+
             let weekends = 0;
             let tempDate = new Date();
             while (tempDate.getTime() < targetDate) {
@@ -97,23 +104,24 @@
                 }
                 tempDate.setDate(tempDate.getDate() + 1);
             }
-            
+
             document.getElementById(weekendId).innerHTML = `<span class="bold-number">${weekends}</span> weekends`;
         }
-        
+
         function startCountdowns() {
             const waDate = new Date("May 13, 2025 08:00:00").getTime();
             const prelimDate = new Date("August 15, 2025 08:00:00").getTime();
             const psleDate = new Date("September 30, 2025 08:00:00").getTime();
-            
+
             setInterval(() => {
                 updateCountdown(waDate, "waCountdown", "waWeekendCountdown");
                 updateCountdown(prelimDate, "prelimCountdown", "prelimWeekendCountdown");
                 updateCountdown(psleDate, "psleCountdown", "psleWeekendCountdown");
             }, 1000);
         }
-        
+
         startCountdowns();
     </script>
 </body>
 </html>
+
